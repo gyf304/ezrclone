@@ -17,7 +17,7 @@ class InvalidStateError(Exception):
 HELPER_DIRECTORY_NAME = '.rclone-helper'
 CONFIG_FILE_NAME = 'config.json'
 STATE_FILE_NAME = 'state.json'
-INCLUDE_LIST_FILE_NAME = 'include_list'
+FILTER_LIST_FILE_NAME = 'filter_list'
 
 ROOT_NOT_FOUND_ERROR_STR = r'fatal: Not a repository (or any of the parent directories): ' \
     + HELPER_DIRECTORY_NAME + r' (Did you init?)'
@@ -42,6 +42,7 @@ def find_config_dir():
 
 
 def load_config():
+    """Loads config to a dict"""
     config_dir = find_config_dir()
     config_path = os.path.join(find_config_dir(), CONFIG_FILE_NAME)
     with open(config_path, encoding='utf-8') as file:

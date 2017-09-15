@@ -30,10 +30,23 @@ def main():
         parser.add_argument(*args, **kwargs)
     parser.add_argument('options', nargs=argparse.REMAINDER)
     args = parser.parse_args()
-    out_file = os.devnull if args.quiet else sys.stdout
-    err_file = os.devnull if args.quiet else sys.stderr
-    COMMANDS[args.command](options=args.options, out_file=out_file,
-                           err_file=err_file, verbose=args.verbose, yes=args.yes)
+    yes = args.yes or args.quiet
+    out_file = sys.stdout
+    err_file = sys.stderr
+    ret = 1
+    if args.quiet:
+        null_file = open(os.devnull, 'w')
+        out_file = null_file
+        err_file = null_file
+    try:
+        ret = COMMANDS[args.command](options=args.options, out_file=out_file,
+                                     err_file=err_file, verbose=args.verbose, yes=yes)
+    except KeyboardInterrupt:
+        print('Quitting')
+    finally:
+        if args.quiet:
+            null_file.close()
+        sys.exit(ret)
 
 
 if __name__ == '__main__':

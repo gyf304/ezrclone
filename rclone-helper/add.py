@@ -15,13 +15,13 @@ def add(options=tuple(), out_file=sys.stdout, err_file=sys.stderr, verbose=0, **
         state = load_state()
     except RootNotFoundError:
         print(ROOT_NOT_FOUND_ERROR_STR, file=err_file)
-        sys.exit(1)
+        return 1
     except InvalidConfigError:
         print(CONFIG_ERROR_STR, file=err_file)
-        sys.exit(1)
+        return 1
     except InvalidStateError:
         print(STATE_ERROR_STR, file=err_file)
-        sys.exit(1)
+        return 1
     parser = argparse.ArgumentParser()
     for (args, kwargs) in ARGS:
         parser.add_argument(*args, **kwargs)
@@ -32,9 +32,12 @@ def add(options=tuple(), out_file=sys.stdout, err_file=sys.stderr, verbose=0, **
         state['include'] = []
     if state['include'] != 'all':
         for file_name in args.file:
-            file_path = os.sep + os.path.relpath(file_name, root_dir)
+            rel_path = os.path.relpath(file_name, root_dir)
+            if rel_path in ('.', '/', './'):
+                rel_path = ''
+            file_path = os.sep + rel_path
             file_type = 'file'
-            if os.path.isdir(file_name) or file_name.endswith(os.sep):
+            if os.path.isdir(file_name) or file_path.endswith(os.sep):
                 file_type = 'dir'
             file_entry = (file_path, file_type)
             if file_entry not in map(tuple, state['include']):
