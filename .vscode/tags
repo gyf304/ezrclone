@@ -1,0 +1,14 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CONFIG_DIRECTORY_NAME	../__init__.py	/^CONFIG_DIRECTORY_NAME = '.rclone-helper'/;"	kind:variable	line:1
+__init__.py	../__init__.py	1;"	kind:file	line:1
+argparse	../rclone-helper-add.py	/^    import argparse$/;"	kind:namespace	line:2
+main	../rclone-helper-add.py	/^def main():$/;"	kind:function	line:1
+os	../rclone-helper-add.py	/^    import os$/;"	kind:namespace	line:4
+rclone-helper-add.py	../rclone-helper-add.py	1;"	kind:file	line:1
+rclone-helper-push.py	../rclone-helper-push.py	1;"	kind:file	line:1
+sys	../rclone-helper-add.py	/^    import sys$/;"	kind:namespace	line:3
