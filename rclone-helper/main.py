@@ -42,7 +42,7 @@ def main():
         ret = COMMANDS[args.command](options=args.options, out_file=out_file,
                                      err_file=err_file, verbose=args.verbose, yes=yes)
     except KeyboardInterrupt:
-        print('Quitting')
+        print('Quitting', file=err_file)
     finally:
         if args.quiet:
             null_file.close()

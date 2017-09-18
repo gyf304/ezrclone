@@ -70,7 +70,7 @@ def pushpull(options=tuple(), out_file=sys.stdout, err_file=sys.stderr, mode='pu
         for exclude_item in config['exclude']:
             filter_file.write('- ' + exclude_item + '\n')
             # do not include config folder
-        filter_file.write('- /' + HELPER_DIRECTORY_NAME + '/\n')
+        filter_file.write('- '+ os.sep + HELPER_DIRECTORY_NAME + os.sep + '\n')
         file_list = state['include']
         if isinstance(state['include'], list):
             for (file_path, file_type) in file_list:
@@ -93,8 +93,8 @@ def pushpull(options=tuple(), out_file=sys.stdout, err_file=sys.stderr, mode='pu
     print(*rclone_args, file=err_file)
     if not yes:
         subprocess.call(rclone_args + ['--dry-run'], stdout=out_file, stderr=err_file)
-    prompt_answer = 'yes' if yes else input('Is that OK? {yes,no} ')
-    if prompt_answer == 'yes':
+    prompt_answer = 'y' if yes else input('Is that OK? {y,n} ')
+    if prompt_answer == 'y':
         subprocess.call(rclone_args, stdout=out_file, stderr=err_file)
         reset()
         return 0
