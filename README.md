@@ -18,7 +18,7 @@ Example configuration
   "remote": {
     "onedrive": {
       "flags": ["--ignore-size"],
-      "dir": "/" //remote directory
+      "dir": "/"
     },
     "gdrive": {
       "flags": [],
